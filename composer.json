@@ -1,0 +1,50 @@
+{
+  "name": "clearcode/wordpress",
+  "type": "project",
+  "license": "GPL-3.0+",
+  "description": "WordPress boilerplate by Clearcode.",
+  "homepage": "https://clearcode.cc",
+  "authors": [
+    {
+      "name": "Clearcode",
+      "homepage": "https://github.com/clearcode"
+    },
+    {
+      "name": "Piotr Niewiadomski",
+      "homepage": "https://github.com/PiotrPress"
+    }
+  ],
+  "keywords": [
+    "wordpress", "wp", "blog", "cms", "composer"
+  ],
+  "support": {
+    "issues": "https://github.com/clearcode/wordpress/issues"
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "composer/installers": "*",
+    "johnpbloch/wordpress": "*"
+  },
+  "extra": {
+    "installer-paths": {
+      "wordpress/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "wordpress/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wordpress/themes/{$name}/": ["type:wordpress-theme"]
+    }
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "php -r \"copy('install/wp-config.php', 'wordpress/wp-config.php');\"",
+      "php -r \"copy('install/wordpress/.htaccess', 'wordpress/wordpress/.htaccess');\""
+    ]
+  }
+}
