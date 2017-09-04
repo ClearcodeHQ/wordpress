@@ -7,7 +7,7 @@
   "authors": [
     {
       "name": "Clearcode",
-      "homepage": "https://github.com/clearcode"
+      "homepage": "https://github.com/ClearcodeHQ"
     },
     {
       "name": "Piotr Niewiadomski",
@@ -18,7 +18,7 @@
     "wordpress", "wp", "blog", "cms", "composer"
   ],
   "support": {
-    "issues": "https://github.com/clearcode/wordpress/issues"
+    "issues": "https://github.com/ClearcodeHQ/wordpress/issues"
   },
   "config": {
     "preferred-install": "dist"
