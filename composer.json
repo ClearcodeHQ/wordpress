@@ -21,7 +21,8 @@
     "issues": "https://github.com/ClearcodeHQ/wordpress/issues"
   },
   "config": {
-    "preferred-install": "dist"
+    "preferred-install": "dist",
+	"vendor-dir": "wordpress/wp-content/vendor"
   },
   "repositories": [
     {
@@ -36,9 +37,9 @@
   },
   "extra": {
     "installer-paths": {
-      "wordpress/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "wordpress/plugins/{$name}/": ["type:wordpress-plugin"],
-      "wordpress/themes/{$name}/": ["type:wordpress-theme"]
+      "wordpress/wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "wordpress/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wordpress/wp-content/themes/{$name}/": ["type:wordpress-theme"]
     }
   },
   "scripts": {
