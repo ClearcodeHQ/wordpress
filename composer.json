@@ -44,8 +44,8 @@
   },
   "scripts": {
     "post-create-project-cmd": [
-      "php -r \"copy('install/wp-config.php', 'wordpress/wp-config.php');\"",
-      "php -r \"copy('install/wordpress/.htaccess', 'wordpress/wordpress/.htaccess');\""
+      "php -r \"copy('install/wp-config.php', 'wp-config.php');\"",
+      "php -r \"copy('install/wordpress/.htaccess', 'wordpress/.htaccess');\""
     ]
   }
 }
