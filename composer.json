@@ -33,7 +33,8 @@
   "require": {
     "php": ">=7.0",
     "johnpbloch/wordpress-core-installer": "^1.0",
-    "johnpbloch/wordpress-core": "dev-master", 
+    "johnpbloch/wordpress-core": "dev-master",
+    "wpackagist-plugin/cc-mu-plugins-loader": "*",
     "wpackagist-plugin/cc-backup": "*", 
     "wpackagist-plugin/cc-cache": "*", 
     "wpackagist-plugin/cc-clean-head-tags": "*", 
@@ -52,25 +53,11 @@
   },
   "extra": {
     "installer-paths": {
-      "wordpress/wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "wordpress/wp-content/plugins/{$name}/": [
-        "type:wordpress-plugin",
-        "wpackagist-plugin/cc-backup",
-        "wpackagist-plugin/cc-cache",
-        "wpackagist-plugin/cc-clean-head-tags",
-        "wpackagist-plugin/cc-deploy",
-        "wpackagist-plugin/cc-disable-date",
-        "wpackagist-plugin/cc-img-shortcode",
-        "wpackagist-plugin/cc-list-posts",
-        "wpackagist-plugin/cc-minify",
-        "wpackagist-plugin/cc-popup",
-        "wpackagist-plugin/cc-scripts",
-        "wpackagist-plugin/cc-sentry",
-        "wpackagist-plugin/cc-syntax-highlight",
-        "wpackagist-plugin/cc-toc",
-        "wpackagist-plugin/piwik-pro-tag-manager-integration",
-        "wpackagist-plugin/piwik-pro-utm-converter"
+      "wordpress/wp-content/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin",
+        "wpackagist-plugin/cc-mu-plugins-loader"
       ],
+      "wordpress/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
       "wordpress/wp-content/themes/{$name}/": ["type:wordpress-theme"],
       "wordpress/wp-content/{$name}/": ["type:wordpress-dropin"]
     },
