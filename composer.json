@@ -35,6 +35,7 @@
     "johnpbloch/wordpress-core-installer": "^1.0",
     "johnpbloch/wordpress-core": "dev-master",
     "wpackagist-plugin/cc-mu-plugins-loader": "*",
+    "wpackagist-plugin/cc-auto-activate-plugins": "*",
     "wpackagist-plugin/cc-backup": "*", 
     "wpackagist-plugin/cc-cache": "*", 
     "wpackagist-plugin/cc-clean-head-tags": "*", 
@@ -55,7 +56,8 @@
     "installer-paths": {
       "wordpress/wp-content/mu-plugins/{$name}/": [
         "type:wordpress-muplugin",
-        "wpackagist-plugin/cc-mu-plugins-loader"
+        "wpackagist-plugin/cc-mu-plugins-loader",
+        "wpackagist-plugin/cc-auto-activate-plugins"
       ],
       "wordpress/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
       "wordpress/wp-content/themes/{$name}/": ["type:wordpress-theme"],
