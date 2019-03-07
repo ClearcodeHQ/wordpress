@@ -34,13 +34,15 @@
     "php": ">=7.2",
     "johnpbloch/wordpress": "*",
     "clearcode/wordpress-config": "*",
-    "wpackagist-plugin/cc-mu-plugins-loader": "*",
     "wpackagist-plugin/cc-auto-activate-plugins": "*",
+    "wpackagist-plugin/cc-god-user": "*",
+    "wpackagist-plugin/cc-mu-plugins-loader": "*",
     "wpackagist-plugin/cc-backup": "*",
     "wpackagist-plugin/cc-cache": "*",
     "wpackagist-plugin/cc-clean-head-tags": "*",
     "wpackagist-plugin/cc-deploy": "*",
     "wpackagist-plugin/cc-disable-date": "*",
+    "wpackagist-plugin/cc-disable-users": "*",
     "wpackagist-plugin/cc-featured-image-column": "*",
     "wpackagist-plugin/cc-id-column": "*",
     "wpackagist-plugin/cc-img-shortcode": "*",
@@ -51,8 +53,10 @@
     "wpackagist-plugin/cc-redirects": "*",
     "wpackagist-plugin/cc-scripts": "*",
     "wpackagist-plugin/cc-sentry": "*",
+    "wpackagist-plugin/cc-server-time": "*",
     "wpackagist-plugin/cc-syntax-highlight": "*",
     "wpackagist-plugin/cc-toc": "*",
+    "wpackagist-plugin/cc-update": "*",
     "wpackagist-plugin/piwik-pro-tag-manager-integration": "*",
     "wpackagist-plugin/piwik-pro-utm-converter": "*"
   },
@@ -60,13 +64,26 @@
     "installer-paths": {
       "wp-content/mu-plugins/{$name}/": [
         "type:wordpress-muplugin",
-        "wpackagist-plugin/cc-mu-plugins-loader",
-        "wpackagist-plugin/cc-auto-activate-plugins"
+        "wpackagist-plugin/cc-auto-activate-plugins",
+        "wpackagist-plugin/cc-god-user",
+        "wpackagist-plugin/cc-mu-plugins-loader"
       ],
       "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
       "wp-content/themes/{$name}/": ["type:wordpress-theme"],
       "wp-content/{$name}/": ["type:wordpress-dropin"]
     },
     "wordpress-install-dir": "wp-core"
+  },
+  "scripts": {
+    "install-cmd": [
+      "cp -R install/* ./",
+      "cp vendor/clearcode/wordpress-config/wp-config.php ./wp-config.php"
+    ],
+    "post-create-project-cmd": [
+      "@install-cmd"
+    ],
+    "post-update-cmd": [
+      "@install-cmd"
+    ]
   }
 }
