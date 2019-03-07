@@ -1,3 +1,12 @@
+# BEGIN ForceSSL
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+# END ForceSSL
+
 ErrorDocument 404 /index.php?error=404
 RedirectMatch 404 /\\.git(/.*|$)
 #RewriteRule ^example\.php.*$ - [R=404,L,NC]
@@ -182,63 +191,6 @@ IndexIgnore *
     </FilesMatch>
 </IfModule>
 
-# BEGIN CC-Monitor
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-
-    #access to monitor
-    RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
-    RewriteCond %{REQUEST_URI} /wp-json/monitor/?(.*)$
-    RewriteRule .* - [F,NC,L]
-
-    #access to wp-json
-    RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
-    RewriteCond %{REQUEST_URI} !/wp-json/monitor/?(.*)$
-    RewriteCond %{REQUEST_URI} /wp-json/?(.*)$
-    RewriteRule .* - [F,NC,L]
-</IfModule>
-# END CC-Monitor
-
-# BEGIN CC-Cache
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-
-    RewriteCond %{QUERY_STRING} !(^|&)cache=false($|&)
-    RewriteCond %{HTTP:cache} !false
-    RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/$1/index.html -f
-    RewriteRule (.*) /wp-content/cache/$1/index.html [L]
-    RewriteCond %{QUERY_STRING} !(^|&)cache=false($|&)
-    RewriteCond %{HTTP:cache} !false
-    RewriteCond %{HTTP:Cookie} !^.*(comment_author_|wordpress_logged_in|wp-postpass_).*$
-    RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/index.html -f
-    RewriteRule ^$ /wp-content/cache/index.html [L]
-</IfModule>
-# END CC-Cache
-
-# BEGIN Rewrite
-#<IfModule mod_rewrite.c>
-#    RewriteEngine On
-#    RewriteBase /
-#
-#    RewriteRule ^img/(.*) wp-content/themes/example/assets/dist/img/$1 [L]
-#    RewriteRule ^css/(.*) wp-content/themes/example/assets/dist/css/$1 [L]
-#    RewriteRule ^js/(.*) wp-content/themes/example/assets/dist/js/$1 [L]
-#    RewriteRule ^fonts/(.*) wp-content/themes/example/assets/dist/fonts/$1 [L]
-#</IfModule>
-# END Rewrite
-
-# BEGIN Basic Auth
-#<IfModule mod_rewrite.c>
-#RewriteEngine On
-#RewriteCond %{HTTP:Authorization} ^(.*)
-#RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
-#</IfModule>
-# END Basic Auth
-
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -257,33 +209,13 @@ RewriteRule . /index.php [L]
 </Files>
 
 <Files "wp-login.php">
-	Order allow,deny
-	Allow From 127.0.0.1
+    Order allow,deny
+    Allow from 127.0.0.1
 </Files>
 
 <Files "wp-cron.php">
-	Order allow,deny
-	Allow From 127.0.0.1
-</Files>
-
-<Files ".htaccess">
-	Order allow,deny
-	Deny from all
-</Files>
-
-<Files "wp-config.php">
-	Order allow,deny
-	Deny from all
-</Files>
-
-<Files "wp-config-sample.php">
-	Order allow,deny
-	Deny from all
-</Files>
-
-<Files "debug.log">
-	Order deny,allow
-	Deny from all
+    Order allow,deny
+    Allow from 127.0.0.1
 </Files>
 
 <Files  ~ "\.log$">

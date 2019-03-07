@@ -1,5 +1,7 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
-    RewriteRule ^(.*)$ /wordpress/$1 [L]
+    RewriteRule ^wp-admin$ wp-admin/ [R=301,L]
+    RewriteRule ^((wp-content).*) $1 [L]
+    RewriteRule ^(.*)$ /wp-core/$1 [L]
 </IfModule>

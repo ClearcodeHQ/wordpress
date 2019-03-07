@@ -21,8 +21,8 @@
     "issues": "https://github.com/ClearcodeHQ/wordpress/issues"
   },
   "config": {
-    "preferred-install": "dist", 
-    "vendor-dir": "wordpress/wp-content/vendor"
+    "preferred-install": "dist",
+    "vendor-dir": "vendor"
   },
   "repositories": [
     {
@@ -31,50 +31,59 @@
     }
   ],
   "require": {
-    "php": ">=7.0",
-	"composer/installers": "^1.4",
-    "johnpbloch/wordpress-core-installer": "^1.0",
-    "johnpbloch/wordpress-core": "*",
-    "wpackagist-plugin/cc-mu-plugins-loader": "*",
+    "php": ">=7.2",
+    "johnpbloch/wordpress": "*",
+    "clearcode/wordpress-config": "*",
     "wpackagist-plugin/cc-auto-activate-plugins": "*",
-    "wpackagist-plugin/cc-backup": "*", 
-    "wpackagist-plugin/cc-cache": "*", 
-    "wpackagist-plugin/cc-clean-head-tags": "*", 
-    "wpackagist-plugin/cc-deploy": "*", 
-    "wpackagist-plugin/cc-disable-date": "*", 
-	"wpackagist-plugin/cc-featured-image-column": "*", 
-	"wpackagist-plugin/cc-id-column": "*", 
-    "wpackagist-plugin/cc-img-shortcode": "*", 
-	"wpackagist-plugin/cc-link-shortcode": "*", 
-    "wpackagist-plugin/cc-list-posts": "*", 
-    "wpackagist-plugin/cc-minify": "*", 
-    "wpackagist-plugin/cc-popup": "*", 
-	"wpackagist-plugin/cc-redirects": "*", 
-    "wpackagist-plugin/cc-scripts": "*", 
-    "wpackagist-plugin/cc-sentry": "*", 
-    "wpackagist-plugin/cc-syntax-highlight": "*", 
-    "wpackagist-plugin/cc-toc": "*", 
-    "wpackagist-plugin/piwik-pro-tag-manager-integration": "*", 
+    "wpackagist-plugin/cc-god-user": "*",
+    "wpackagist-plugin/cc-mu-plugins-loader": "*",
+    "wpackagist-plugin/cc-backup": "*",
+    "wpackagist-plugin/cc-cache": "*",
+    "wpackagist-plugin/cc-clean-head-tags": "*",
+    "wpackagist-plugin/cc-deploy": "*",
+    "wpackagist-plugin/cc-disable-date": "*",
+    "wpackagist-plugin/cc-disable-users": "*",
+    "wpackagist-plugin/cc-featured-image-column": "*",
+    "wpackagist-plugin/cc-id-column": "*",
+    "wpackagist-plugin/cc-img-shortcode": "*",
+    "wpackagist-plugin/cc-link-shortcode": "*",
+    "wpackagist-plugin/cc-list-posts": "*",
+    "wpackagist-plugin/cc-minify": "*",
+    "wpackagist-plugin/cc-popup": "*",
+    "wpackagist-plugin/cc-redirects": "*",
+    "wpackagist-plugin/cc-scripts": "*",
+    "wpackagist-plugin/cc-sentry": "*",
+    "wpackagist-plugin/cc-server-time": "*",
+    "wpackagist-plugin/cc-syntax-highlight": "*",
+    "wpackagist-plugin/cc-toc": "*",
+    "wpackagist-plugin/cc-update": "*",
+    "wpackagist-plugin/piwik-pro-tag-manager-integration": "*",
     "wpackagist-plugin/piwik-pro-utm-converter": "*"
   },
   "extra": {
     "installer-paths": {
-      "wordpress/wp-content/mu-plugins/{$name}/": [
+      "wp-content/mu-plugins/{$name}/": [
         "type:wordpress-muplugin",
-        "wpackagist-plugin/cc-mu-plugins-loader",
-        "wpackagist-plugin/cc-auto-activate-plugins"
+        "wpackagist-plugin/cc-auto-activate-plugins",
+        "wpackagist-plugin/cc-god-user",
+        "wpackagist-plugin/cc-mu-plugins-loader"
       ],
-      "wordpress/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
-      "wordpress/wp-content/themes/{$name}/": ["type:wordpress-theme"],
-      "wordpress/wp-content/{$name}/": ["type:wordpress-dropin"]
+      "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wp-content/themes/{$name}/": ["type:wordpress-theme"],
+      "wp-content/{$name}/": ["type:wordpress-dropin"]
     },
-    "wordpress-install-dir": "wordpress"
+    "wordpress-install-dir": "wp-core"
   },
   "scripts": {
+    "install-cmd": [
+      "cp -R install/* ./",
+      "cp vendor/clearcode/wordpress-config/wp-config.php ./wp-config.php"
+    ],
     "post-create-project-cmd": [
-      "php -r \"copy('install/wp-config.php', 'wp-config.php');\"",
-      "php -r \"copy('install/wordpress/.htaccess', 'wordpress/.htaccess');\"",
-      "php -r \"rename('wordpress/wp-content/mu-plugins/cc-mu-plugins-loader/loader.php', 'wordpress/wp-content/mu-plugins/loader.php');\""
+      "@install-cmd"
+    ],
+    "post-update-cmd": [
+      "@install-cmd"
     ]
   }
 }
